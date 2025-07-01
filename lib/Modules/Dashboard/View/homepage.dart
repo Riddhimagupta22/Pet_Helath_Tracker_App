@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_app/Comman/widget/image_widget.dart';
+import 'package:pet_app/Modules/Reminder/view/reminder.dart';
 import 'package:pet_app/Modules/Starting%20Screen/Onboarding%20Screen/widget/card_widget.dart';
 
 class Homepage extends StatefulWidget {
@@ -104,7 +106,7 @@ class _HomepageState extends State<Homepage> {
                       ],
                     )),
                 CardWidget(
-                  onTap: (){},
+                  onTap: (){Get.to(ReminderScreen());},
                     image: "Assets/Icon/Callender Icon.png",
                     title: "Upcoming Reminders",
                     subtitle: "Today's feeding,\nwalking, and vet visits."),
