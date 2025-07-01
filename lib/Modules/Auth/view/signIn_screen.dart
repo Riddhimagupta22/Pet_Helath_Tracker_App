@@ -36,6 +36,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Form(
+                    key: _authController.LoginformKey,
                     child: Column(
                   children: [
                     Text(
@@ -55,6 +56,42 @@ class _SigninScreenState extends State<SigninScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Email",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                              height: 44,
+                              child: TextFormField(
+                                controller: _authController.emailController,
+                                validator: _authController.validateEmail,
+                                keyboardType: TextInputType.name,
+                                textInputAction: TextInputAction.next,
+                                decoration: InputDecoration(
+                                    hintText: 'Enter your email',
+                                    hintStyle: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 14,
+                                        color: Color.fromRGBO(171, 171, 171, 1)),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: const BorderSide(
+                                        color: Color.fromRGBO(243, 120, 29, 1),
+                                      ),
+                                    )),
+                                autovalidateMode: AutovalidateMode.onUserInteraction,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
                         Text(
                           "User name",
                           style: GoogleFonts.poppins(

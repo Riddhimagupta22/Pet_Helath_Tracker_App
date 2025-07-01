@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Services/auth_service.dart';
+import '../Services/Auth/auth_service.dart';
 
 
 class AuthController extends GetxController {
@@ -75,6 +75,7 @@ class AuthController extends GetxController {
       final data = {
 
         "password": PasswordController.text,
+        "email": emailController.text.trim(),
         "username": userNameController.text.trim(),
       };
       await authService.login(data, context);

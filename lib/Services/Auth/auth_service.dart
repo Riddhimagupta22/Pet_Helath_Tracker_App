@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../Comman/nav_bar.dart';
+import '../../Comman/nav_bar.dart';
 import 'doc_data.dart';
 
 
