@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_app/Modules/Dashboard/View/homepage.dart';
 
+import '../Modules/Pet Profile/view/pet_profile.dart';
+
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
@@ -14,9 +16,9 @@ class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-   Homepage(),
+    Homepage(),
     Placeholder(),
-    Placeholder(),
+    PetProfile(),
   ];
 
   @override
@@ -24,8 +26,8 @@ class _NavBarState extends State<NavBar> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final iconSize = screenWidth * 0.065;
-    final navbarHeight = screenWidth * 0.2;
-    final fontSize = screenWidth * 0.03;
+    final navbarHeight = screenWidth * 0.16;
+    final fontSize = screenWidth * 0.025;
 
     return Scaffold(
       body: PageView(
@@ -44,18 +46,18 @@ class _NavBarState extends State<NavBar> {
           border: Border(top: BorderSide(color: Color(0xFFF0EFEF), width: 1)),
         ),
         child: BottomNavigationBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(240, 169, 115, 1),
           iconSize: iconSize,
           selectedLabelStyle: GoogleFonts.inter(
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             fontSize: fontSize,
           ),
           unselectedLabelStyle: GoogleFonts.inter(
             fontWeight: FontWeight.w500,
             fontSize: fontSize,
           ),
-          selectedItemColor: const Color.fromRGBO(255, 164, 80, 1),
-          unselectedItemColor: const Color.fromRGBO(131, 131, 131, 1),
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
           currentIndex: _selectedIndex,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
@@ -64,18 +66,30 @@ class _NavBarState extends State<NavBar> {
             });
             _pageViewController.jumpToPage(index);
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon: Image.asset(
+                'Assets/Icon/Icon.png',
+                height: iconSize,
+                color: Colors.white,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart),
-              label: 'Progess',
+              icon: Image.asset(
+                'Assets/Icon/cat.png',
+                height: iconSize,
+                color: Colors.white,
+              ),
+              label: 'Pet Mart',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Setting',
+              icon: Image.asset(
+                'Assets/Icon/paw.png',
+                height: iconSize,
+                color: Colors.white,
+              ),
+              label: 'Pet',
             ),
           ],
         ),
