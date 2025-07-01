@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_app/Modules/Auth/view/signIn_screen.dart';
 import 'package:pet_app/Modules/Starting%20Screen/Onboarding%20Screen/widget/data.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -102,7 +104,9 @@ class _OnBoardingState extends State<OnBoarding> {
                     width: 129,
                     child: ElevatedButton(
                       onPressed: (){
-                        if (_currentIndex == onBoardingData.length-1){}
+                        if (_currentIndex == onBoardingData.length-1){
+                          Get.off(SigninScreen());
+                        }
                         else{
                           _nextPage();
                         }
@@ -133,6 +137,8 @@ class _OnBoardingState extends State<OnBoarding> {
                 right: 10,
                 child: TextButton(
                   onPressed: () {
+                    Get.off(SigninScreen());
+
                   },
                   child: Row(
                     children: [
