@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_app/Modules/Reminder/view/add_reminder.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../Controller/reminder_controller.dart';
 import '../widget/toggle.dart';
 
 class ReminderScreen extends StatefulWidget {
@@ -12,15 +15,15 @@ class ReminderScreen extends StatefulWidget {
 }
 
 class _ReminderScreenState extends State<ReminderScreen> {
+  final ReminderController reminderController = Get.put(ReminderController());
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
-  final List<Map<String, String>> reminders = [
-    {'date': '26 March 2025 12:30', 'title': 'Scheduled Bath'},
-    {'date': '1 Apr 2025 15:30', 'title': 'Scheduled Appointment'},
-    {'date': '20 Apr 2025 10:30', 'title': 'Scheduled Walk'},
-    {'date': '2 May 2025 18:00', 'title': 'Scheduled Surgery'},
-  ];
+  @override
+  void initState() {
+    super.initState();
+    reminderController.loadReminders();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                         color: Colors.black),
                   ),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 18),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -77,6 +80,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                       });
                     },
                     calendarStyle: CalendarStyle(
+                      outsideDaysVisible: false,
                       todayDecoration: BoxDecoration(
                         color: Colors.orange.shade300,
                         shape: BoxShape.circle,
@@ -92,9 +96,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 SizedBox(height: 20),
 
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await Get.to(() => AddRemindersScreen());
+                    reminderController.loadReminders();
+                  },
                   icon: CircleAvatar(
-                    radius: 13,
+                      radius: 13,
                       backgroundColor: Color.fromRGBO(240, 169, 115, 1),
                       child: Icon(
                         Icons.add,
@@ -116,48 +123,97 @@ class _ReminderScreenState extends State<ReminderScreen> {
 
                 SizedBox(height: 16),
 
-                // 📋 Reminder List
-                Column(
-                  children: reminders.map((item) {
-                    return Container(
-                      margin: EdgeInsets.only(bottom: 12),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black12, blurRadius: 4)
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.pets, color: Colors.orange),
-                          SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(item['title']!,
-                                    style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14)),
-                                SizedBox(height: 4),
-                                Text(item['date']!,
-                                    style: GoogleFonts.poppins(fontSize: 12)),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                // Reminder List
+                Obx(() {
+                  final reminders = reminderController.reminders;
+
+                  if (reminderController.isLoading.value) {
+                    return CircularProgressIndicator();
+                  }
+
+                  if (reminders.isEmpty) {
+                    return Center(
+                      child: Text("No reminders yet.",
+                          style: GoogleFonts.poppins(fontSize: 14)),
                     );
-                  }).toList(),
-                )
+                  }
+
+                  return Column(
+                    children: reminders.map((item) {
+                      return GestureDetector(
+                        onLongPress: () {
+                          Get.defaultDialog(
+                            title: "Delete Reminder",
+                            middleText:
+                                "Are you sure you want to delete this reminder?",
+                            textCancel: "Cancel",
+                            textConfirm: "Delete",
+                            confirmTextColor: Colors.white,
+                            onConfirm: () {
+                              if (item.id != null) {
+                                reminderController.deleteReminder(item.id!);
+                              }
+                              Get.back();
+                            },
+                          );
+                        },
+                        child: Container(
+                          height: 65,
+                          width: 240,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50),
+                            boxShadow: [
+                              BoxShadow(color: Colors.black12, blurRadius: 4)
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(Icons.pets, color: Colors.orange),
+                              SizedBox(width: 19),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "${item.date.day} ${_monthName(item.date.month)} ${item.date.year} ${item.time}",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        letterSpacing: -1,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text(item.type,
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 14)),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  );
+                })
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  String _monthName(int month) {
+    const months = [
+      '',
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    return months[month];
   }
 }

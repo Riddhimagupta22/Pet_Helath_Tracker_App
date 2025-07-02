@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_app/Comman/widget/image_widget.dart';
 import 'package:pet_app/Modules/Reminder/view/reminder.dart';
-import 'package:pet_app/Modules/Starting%20Screen/Onboarding%20Screen/widget/card_widget.dart';
+import 'package:pet_app/Modules/Dashboard/Widget/card_widget.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -60,12 +59,12 @@ class _HomepageState extends State<Homepage> {
             child: Column(
               children: [
                 Container(
-                  height:164 ,
+                  height:120 ,
                     color: Colors.white,
                     child: Row(
                       children: [
                         Image.asset("Assets/Image/community .png",
-                            height: 215, width: 225),
+                            height: 215, width: 180),
                         SizedBox(width: 10),
                         Expanded(
                           child: Column(
@@ -105,23 +104,32 @@ class _HomepageState extends State<Homepage> {
                         ),
                       ],
                     )),
-                CardWidget(
-                  onTap: (){Get.to(ReminderScreen());},
-                    image: "Assets/Icon/Callender Icon.png",
-                    title: "Upcoming Reminders",
-                    subtitle: "Today's feeding,\nwalking, and vet visits."),
-                SizedBox(height: 15),
-                CardWidget(
-                    onTap: (){},
-                    image: "Assets/Icon/Group.png",
-                    title: "Pet Health Summary",
-                    subtitle: "Overview of pet\nwellness.."),
-                SizedBox(height: 15),
-                CardWidget(
-                    onTap: (){},
-                    image: "Assets/Icon/caticon.png",
-                    title: "Pet Mart",
-                    subtitle: "Daily advice on pet health,\ntraining, and nutrition."),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CardWidget(
+                    onTap: (){Get.to(ReminderScreen());},
+                      image: "Assets/Icon/Callender Icon.png",
+                      title: "Upcoming Reminders",
+                      subtitle: "Today's feeding,\nwalking, and vet visits."),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CardWidget(
+                      onTap: (){},
+                      image: "Assets/Icon/Group.png",
+                      title: "Pet Health Summary",
+                      subtitle: "Overview of pet\nwellness.."),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CardWidget(
+                      onTap: (){},
+                      image: "Assets/Icon/caticon.png",
+                      title: "Pet Mart",
+                      subtitle: "Daily advice on pet health,\ntraining, and nutrition."),
+                ),
                 SizedBox(height: 15),
               ],
             ),

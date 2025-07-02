@@ -1,25 +1,22 @@
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../models/pet_model.dart';
+import '../Models/pet_model.dart';
 
 class PetService {
-  final _client = Supabase.instance.client;
-  final _table = 'pets';
-
-  Future<List<PetModel>> fetchPets(String userId) async {
-    final response = await _client
-        .from(_table)
-        .select()
-        .eq('user_id', userId)
-        .order('created_at', ascending: false);
-
-    return (response as List).map((e) => PetModel.fromMap(e)).toList();
+  Future<void> savePetProfile(PetModel pet) async {
+    final user = FirebaseAuth.instance.currentUser!;
+    await Supabase.instance.client
+        .from('pets')
+        .upsert({'uid': user.uid, ...pet.toMap()});
   }
 
-  Future<PetModel?> addPet(PetModel pet) async {
-    final response = await _client
-        .from(_table)
-        .insert(pet.toMap())
+  Future<PetModel?> getPetProfile() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final response = await Supabase.instance.client
+        .from('pets')
         .select()
+        .eq('uid', user.uid)
         .single();
 
     if (response != null) {
@@ -28,11 +25,18 @@ class PetService {
     return null;
   }
 
-  Future<void> deletePet(String id) async {
-    await _client.from(_table).delete().eq('id', id);
-  }
+  Future<String> uploadPetImage(File file) async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final fileName = 'pets/${user.uid}/${DateTime.now().millisecondsSinceEpoch}.jpg';
 
-  Future<void> updatePet(String id, Map<String, dynamic> updatedFields) async {
-    await _client.from(_table).update(updatedFields).eq('id', id);
+    await Supabase.instance.client.storage
+        .from('pet_images') // Your bucket name
+        .upload(fileName, file);
+
+    final url = Supabase.instance.client.storage
+        .from('pet_images')
+        .getPublicUrl(fileName);
+
+    return url;
   }
 }
