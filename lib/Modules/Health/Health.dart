@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
+import '../../Controller/vet_controller.dart';
 
-import '../../../Controller/reminder_controller.dart';
+class VetVisit extends StatelessWidget {
+  final vetVisitController = Get.put(VetVisitController());
 
-class AddRemindersScreen extends StatelessWidget {
-  final reminderController = Get.put(ReminderController());
+  VetVisit({super.key});
 
   Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
+    final pickedTime = await showTimePicker(
       context: context,
-      initialTime: reminderController.selectedTime.value,
+      initialTime: vetVisitController.selectedTime.value,
     );
-    if (picked != null && picked != reminderController.selectedTime.value) {
-      reminderController.selectedTime.value = picked;
+    if (pickedTime != null) {
+      vetVisitController.selectedTime.value = pickedTime;
     }
   }
 
@@ -35,7 +37,7 @@ class AddRemindersScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Form(
-                  key: reminderController.reminderFormKey,
+                  key: vetVisitController.formKey,
                   child: Column(
                     children: [
                       Row(
@@ -46,7 +48,7 @@ class AddRemindersScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 8),
                           const Text(
-                            "Add Reminders",
+                            "Add Vet Visit",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -54,43 +56,40 @@ class AddRemindersScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 20.0, left: 16, right: 16),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Obx(() => TableCalendar(
-                                firstDay: DateTime.utc(2020, 1, 1),
-                                lastDay: DateTime.utc(2030, 12, 31),
-                                focusedDay:
-                                    reminderController.selectedDate.value,
-                                selectedDayPredicate: (day) => isSameDay(
-                                    reminderController.selectedDate.value, day),
-                                onDaySelected: (selectedDay, focusedDay) {
-                                  reminderController.selectedDate.value =
-                                      selectedDay;
-                                },
-                                headerStyle: const HeaderStyle(
-                                  formatButtonVisible: false,
-                                  titleCentered: true,
-                                ),
-                                calendarStyle: CalendarStyle(
-                                  outsideDaysVisible: false,
-                                  todayDecoration: BoxDecoration(
-                                    color: Colors.orange[300],
-                                    shape: BoxShape.circle,
-                                  ),
-                                  selectedDecoration: const BoxDecoration(
-                                    color: Colors.orange,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              )),
+                      const SizedBox(height: 10),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
                         ),
+                        child: Obx(() => TableCalendar(
+                              firstDay: DateTime.utc(2020, 1, 1),
+                              lastDay: DateTime.utc(2030, 12, 31),
+                              focusedDay: vetVisitController.selectedDate.value,
+                              selectedDayPredicate: (day) => isSameDay(
+                                  vetVisitController.selectedDate.value, day),
+                              onDaySelected: (selectedDay, focusedDay) {
+                                vetVisitController.selectedDate.value =
+                                    selectedDay;
+                              },
+                              headerStyle: const HeaderStyle(
+                                formatButtonVisible: false,
+                                titleCentered: true,
+                              ),
+                              calendarStyle: CalendarStyle(
+                                outsideDaysVisible: false,
+                                todayDecoration: BoxDecoration(
+                                  color: Colors.orange[300],
+                                  shape: BoxShape.circle,
+                                ),
+                                selectedDecoration: const BoxDecoration(
+                                  color: Colors.orange,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            )),
                       ),
+                      const SizedBox(height: 12),
 
                       // Time Field
                       Obx(() => Container(
@@ -105,42 +104,52 @@ class AddRemindersScreen extends StatelessWidget {
                                 border: OutlineInputBorder(),
                               ),
                               controller: TextEditingController(
-                                text:
-                                    "${reminderController.selectedTime.value.hourOfPeriod}:${reminderController.selectedTime.value.minute.toString().padLeft(2, '0')} ${reminderController.selectedTime.value.period == DayPeriod.am ? 'AM' : 'PM'}",
+                                text: DateFormat.jm().format(
+                                  DateTime(
+                                      0,
+                                      0,
+                                      0,
+                                      vetVisitController
+                                          .selectedTime.value.hour,
+                                      vetVisitController
+                                          .selectedTime.value.minute),
+                                ),
                               ),
                             ),
                           )),
 
-                      // Reminder Type
+                      // Visit Reason
                       Container(
                         height: 56,
-                        margin:
-                            const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 4),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                            labelText: "Reminder Type",
+                            labelText: "Visit Reason",
                             border: OutlineInputBorder(),
                           ),
-                          controller: reminderController.reminderTypeController,
-                          validator: reminderController.validateReminderType,
+                          controller: vetVisitController.reasonController,
+                          validator: (value) => value == null || value.isEmpty
+                              ? 'Enter reason'
+                              : null,
                         ),
                       ),
 
                       // Notes
                       Container(
                         height: 78,
-                        margin:
-                            const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 4),
                         child: TextFormField(
                           maxLines: 3,
                           decoration: const InputDecoration(
                             labelText: "Notes",
                             border: OutlineInputBorder(),
                           ),
-                          controller: reminderController.notesController,
-                          validator: reminderController.validateNotes,
+                          controller: vetVisitController.notesController,
                         ),
                       ),
+                      SizedBox(height: 15),
 
                       // Buttons
                       Padding(
@@ -160,8 +169,10 @@ class AddRemindersScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                 ),
-                                onPressed: (){
-                                    reminderController.saveReminder(context);},
+                                onPressed: () {
+                                  Get.back();
+                                  vetVisitController.saveVisit();
+                                },
                                 child: Text(
                                   "Save",
                                   style: GoogleFonts.poppins(
@@ -184,9 +195,7 @@ class AddRemindersScreen extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: () {
-                                  reminderController.reminderTypeController
-                                      .clear();
-                                  reminderController.notesController.clear();
+                                  vetVisitController.clearFields();
                                   Get.back();
                                 },
                                 child: Text(

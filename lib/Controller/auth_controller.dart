@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../Services/Auth/auth_service.dart';
+import 'User_controller.dart';
 
 
 class AuthController extends GetxController {

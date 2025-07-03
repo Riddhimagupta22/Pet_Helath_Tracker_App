@@ -121,7 +121,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                   ),
                 ),
 
-                SizedBox(height: 16),
+
 
                 // Reminder List
                 Obx(() {
@@ -138,14 +138,17 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     );
                   }
 
-                  return Column(
-                    children: reminders.map((item) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: reminders.length,
+                    itemBuilder: (context, index) {
+                      final item = reminders[index];
                       return GestureDetector(
                         onLongPress: () {
                           Get.defaultDialog(
                             title: "Delete Reminder",
-                            middleText:
-                                "Are you sure you want to delete this reminder?",
+                            middleText: "Are you sure you want to delete this reminder?",
                             textCancel: "Cancel",
                             textConfirm: "Delete",
                             confirmTextColor: Colors.white,
@@ -160,14 +163,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
                         child: Container(
                           height: 65,
                           width: 240,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 10),
+                          margin: EdgeInsets.symmetric( horizontal: 40, vertical: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(50),
-                            boxShadow: [
-                              BoxShadow(color: Colors.black12, blurRadius: 4)
-                            ],
+                            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
                           ),
                           child: Row(
                             children: [
@@ -188,8 +189,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                                     SizedBox(height: 4),
                                     Text(item.type,
                                         style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w800,
-                                            fontSize: 14)),
+                                            fontWeight: FontWeight.w800, fontSize: 14)),
                                   ],
                                 ),
                               )
@@ -197,9 +197,10 @@ class _ReminderScreenState extends State<ReminderScreen> {
                           ),
                         ),
                       );
-                    }).toList(),
+                    },
                   );
                 })
+
               ],
             ),
           ),
@@ -211,8 +212,18 @@ class _ReminderScreenState extends State<ReminderScreen> {
   String _monthName(int month) {
     const months = [
       '',
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
     ];
     return months[month];
   }

@@ -52,60 +52,24 @@ class _SigninScreenState extends State<SigninScreen> {
                           fontSize: 28,
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Email",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(
-                              height: 44,
-                              child: TextFormField(
-                                controller: _authController.emailController,
-                                validator: _authController.validateEmail,
-                                keyboardType: TextInputType.name,
-                                textInputAction: TextInputAction.next,
-                                decoration: InputDecoration(
-                                    hintText: 'Enter your email',
-                                    hintStyle: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 14,
-                                        color: Color.fromRGBO(171, 171, 171, 1)),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: const BorderSide(
-                                        color: Color.fromRGBO(243, 120, 29, 1),
-                                      ),
-                                    )),
-                                autovalidateMode: AutovalidateMode.onUserInteraction,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
                         Text(
-                          "User name",
+                          "Email",
                           style: GoogleFonts.poppins(
                               fontSize: 16, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
                           height: 44,
                           child: TextFormField(
-                            controller: _authController.userNameController,
-                            validator: _authController.validateUsername,
+                            controller: _authController.emailController,
+                            validator: _authController.validateEmail,
                             keyboardType: TextInputType.name,
                             textInputAction: TextInputAction.next,
                             decoration: InputDecoration(
-                                hintText: 'Enter your user name',
+                                hintText: 'Enter your email',
                                 hintStyle: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w300,
                                     fontSize: 14,
@@ -172,7 +136,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -188,7 +152,7 @@ class _SigninScreenState extends State<SigninScreen> {
                             Text(
                               "Rememebr me",
                               style: GoogleFonts.poppins(
-                                  fontSize: 12, fontWeight: FontWeight.w300),
+                                  fontSize: 10, fontWeight: FontWeight.w300),
                             ),
 
                           ],
@@ -197,13 +161,13 @@ class _SigninScreenState extends State<SigninScreen> {
                           "Forgot Password ?",
                           style: GoogleFonts.poppins(
                             color: Color.fromRGBO(77, 77, 77, 1),
-                              fontSize: 12, fontWeight: FontWeight.w300),
+                              fontSize: 10, fontWeight: FontWeight.w300),
                         ),)
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Obx(() => SizedBox(
-                      height: 50,
+                      height: 40,
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -231,7 +195,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                       ),
                     )),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 5),
                     TextButton(
                       onPressed: () => Get.to(SignupScreen()),
                       child: Text(

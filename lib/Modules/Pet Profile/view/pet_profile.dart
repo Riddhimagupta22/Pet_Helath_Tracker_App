@@ -36,7 +36,7 @@ class _PetProfileState extends State<PetProfile> {
             title: const Text('Pick from Gallery'),
             onTap: () {
               Navigator.pop(context);
-              petController.pickAndUploadImage(true); // true = gallery
+              petController.pickAndUploadImage(true);
             },
           ),
           ListTile(
@@ -44,7 +44,7 @@ class _PetProfileState extends State<PetProfile> {
             title: const Text('Take a Photo'),
             onTap: () {
               Navigator.pop(context);
-              petController.pickAndUploadImage(false); // false = camera
+              petController.pickAndUploadImage(false);
             },
           ),
         ],
@@ -65,7 +65,8 @@ class _PetProfileState extends State<PetProfile> {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 50),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 50),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -81,11 +82,12 @@ class _PetProfileState extends State<PetProfile> {
                           backgroundColor: Colors.white,
                           backgroundImage: imagePath.isNotEmpty
                               ? (imagePath.startsWith('http')
-                              ? NetworkImage(imagePath)
-                              : FileImage(File(imagePath)) as ImageProvider)
+                                  ? NetworkImage(imagePath)
+                                  : FileImage(File(imagePath)) as ImageProvider)
                               : null,
                           child: imagePath.isEmpty
-                              ? const Icon(Icons.pets, size: 40, color: Colors.grey)
+                              ? const Icon(Icons.pets,
+                                  size: 40, color: Colors.grey)
                               : null,
                         );
                       }),
@@ -104,8 +106,11 @@ class _PetProfileState extends State<PetProfile> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  CustomField(controller: petController.nameController, label: 'Name'),
-                  CustomField(controller: petController.genderController, label: 'Gender'),
+                  CustomField(
+                      controller: petController.nameController, label: 'Name'),
+                  CustomField(
+                      controller: petController.genderController,
+                      label: 'Gender'),
                   const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -119,11 +124,14 @@ class _PetProfileState extends State<PetProfile> {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  CustomField(controller: petController.weightController, label: 'Weight'),
-                  CustomField(controller: petController.ageController, label: 'Age'),
+                  CustomField(
+                      controller: petController.weightController,
+                      label: 'Weight'),
+                  CustomField(
+                      controller: petController.ageController, label: 'Age'),
                   const SizedBox(height: 12),
                   SizedBox(
-                    height: 59,
+                    height: 50,
                     width: 154,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -136,7 +144,7 @@ class _PetProfileState extends State<PetProfile> {
                         petController.saveProfile();
                       },
                       child: Text(
-                        "Edit",
+                        "Save",
                         style: GoogleFonts.poppins(
                           fontSize: 24,
                           fontWeight: FontWeight.w600,

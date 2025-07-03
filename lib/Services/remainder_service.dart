@@ -2,13 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../Models/remainder_model.dart';
 
-
 class ReminderService {
   final CollectionReference reminderCollection =
-  FirebaseFirestore.instance.collection('reminders');
+      FirebaseFirestore.instance.collection('reminders');
 
   Future<void> addReminder(Reminder reminder) async {
-    await reminderCollection.add(reminder.toMap()); // Auto ID
+    await reminderCollection.add(reminder.toMap());
   }
 
   Future<List<Reminder>> getReminders() async {

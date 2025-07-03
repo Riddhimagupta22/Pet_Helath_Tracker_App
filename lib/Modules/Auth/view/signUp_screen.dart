@@ -23,13 +23,13 @@ class _SignupScreenState extends State<SignupScreen> {
       backgroundColor: Color.fromRGBO(240, 169, 115, 1),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
           child: Column(
             children: [
               ImageWidget(),
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(50),
@@ -220,7 +220,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     const SizedBox(height: 25),
                     Obx(() => SizedBox(
-                          height: 50,
+                          height: 40,
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(

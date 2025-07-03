@@ -14,6 +14,7 @@ class _CustomFieldState extends State<CustomField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 48,
       margin: EdgeInsets.only(bottom: 16),
       padding: EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(

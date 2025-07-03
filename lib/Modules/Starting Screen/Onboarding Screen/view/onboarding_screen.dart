@@ -30,15 +30,14 @@ class _OnBoardingState extends State<OnBoarding> {
         imagePath: "Assets/Image/onBoarding(3).png",
         title: 'Get Pet Care Tips!',
         subtitle:
-        "Join a community of pet lovers, share experiences, and learn the best pet care practices."),
+            "Join a community of pet lovers, share experiences, and learn the best pet care practices."),
   ];
 
   void _nextPage() {
     if (_currentIndex < onBoardingData.length - 1) {
       _controller.nextPage(
           duration: const Duration(milliseconds: 400), curve: Curves.ease);
-    } else {
-    }
+    } else {}
   }
 
   @override
@@ -77,11 +76,10 @@ class _OnBoardingState extends State<OnBoarding> {
                   Text(
                     page.title,
                     style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                      color: Colors.white,
-                      height: -1
-                    ),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        color: Colors.white,
+                        height: -1),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
@@ -93,7 +91,6 @@ class _OnBoardingState extends State<OnBoarding> {
                         fontWeight: FontWeight.w400,
                         fontSize: 18,
                         color: Colors.white,
-
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -103,14 +100,12 @@ class _OnBoardingState extends State<OnBoarding> {
                     height: 39,
                     width: 129,
                     child: ElevatedButton(
-                      onPressed: (){
-                        if (_currentIndex == onBoardingData.length-1){
+                      onPressed: () {
+                        if (_currentIndex == onBoardingData.length - 1) {
                           Get.off(SigninScreen());
-                        }
-                        else{
+                        } else {
                           _nextPage();
                         }
-
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(0, 0, 0, 0.25),
@@ -118,8 +113,10 @@ class _OnBoardingState extends State<OnBoarding> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: Text( _currentIndex == onBoardingData.length-1?'Get Started':
-                        'Next',
+                      child: Text(
+                        _currentIndex == onBoardingData.length - 1
+                            ? 'Get Started'
+                            : 'Next',
                         style: GoogleFonts.jomhuria(
                           fontWeight: FontWeight.w400,
                           fontSize: 25,
@@ -138,7 +135,6 @@ class _OnBoardingState extends State<OnBoarding> {
                 child: TextButton(
                   onPressed: () {
                     Get.off(SigninScreen());
-
                   },
                   child: Row(
                     children: [
@@ -150,7 +146,11 @@ class _OnBoardingState extends State<OnBoarding> {
                           color: Colors.white,
                         ),
                       ),
-                      Icon(Icons.arrow_right,size:22,color: Colors.white,)
+                      Icon(
+                        Icons.arrow_right,
+                        size: 22,
+                        color: Colors.white,
+                      )
                     ],
                   ),
                 ),
@@ -164,7 +164,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     onBoardingData.length,
-                        (i) => Container(
+                    (i) => Container(
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       width: _currentIndex == i ? 12 : 8,
                       height: 8,
