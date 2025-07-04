@@ -30,7 +30,7 @@ class PetService {
     final fileName = 'pets/${user.uid}/${DateTime.now().millisecondsSinceEpoch}.jpg';
 
     await Supabase.instance.client.storage
-        .from('pet_images') // Your bucket name
+        .from('pet_images') 
         .upload(fileName, file);
 
     final url = Supabase.instance.client.storage

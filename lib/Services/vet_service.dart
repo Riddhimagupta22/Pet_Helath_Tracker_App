@@ -8,9 +8,9 @@ class VetVisitService {
 
   Future<void> saveVetVisit(VetVisitModel visit) async {
     final user = _auth.currentUser;
-    if (user == null) throw Exception('User not logged in');
+    if (user == null){print('User not logged in');}
 
-    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final timestamp = DateTime.now().toIso8601String();
 
     await _firestore
         .collection('users')
@@ -22,7 +22,7 @@ class VetVisitService {
 
   Future<void> deleteVetVisit(String id) async {
     final user = _auth.currentUser;
-    if (user == null) throw Exception('User not logged in');
+    if (user == null) {print ('User not logged in');}
 
     await _firestore
         .collection('users')
@@ -35,7 +35,7 @@ class VetVisitService {
 
   Future<List<VetVisitModel>> getAllVetVisits() async {
     final user = _auth.currentUser;
-    if (user == null) throw Exception('User not logged in');
+    if (user == null){print('User not logged in');}
 
     final snapshot = await _firestore
         .collection('users')
