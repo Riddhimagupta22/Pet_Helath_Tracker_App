@@ -128,7 +128,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   ),
                 ],
               ),
-              // Skip button
+              
               Positioned(
                 bottom: 10,
                 right: 10,
@@ -155,7 +155,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   ),
                 ),
               ),
-              // Dot indicators
+              
               Positioned(
                 bottom: 30,
                 left: 0,
