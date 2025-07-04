@@ -10,7 +10,7 @@ class VetVisitService {
     final user = _auth.currentUser;
     if (user == null){print('User not logged in');}
 
-    final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final timestamp = DateTime.now().toIso8601String();
 
     await _firestore
         .collection('users')
