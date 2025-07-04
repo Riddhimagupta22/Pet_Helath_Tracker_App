@@ -8,7 +8,7 @@ class VetVisitService {
 
   Future<void> saveVetVisit(VetVisitModel visit) async {
     final user = _auth.currentUser;
-    if (user == null) throw Exception('User not logged in');
+    if (user == null){print('User not logged in');}
 
     final timestamp = DateTime.now().millisecondsSinceEpoch.toString();
 
