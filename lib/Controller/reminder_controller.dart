@@ -35,9 +35,10 @@ class ReminderController extends GetxController {
     if (reminderFormKey.currentState!.validate()) {
       isLoading.value = true;
 
-      final formattedTime =
-          "${selectedTime.value.hourOfPeriod}:${selectedTime.value.minute.toString().padLeft(2, '0')} ${selectedTime.value.period == DayPeriod.am ? 'AM' : 'PM'}";
-
+     final hour = selectedTime.value.hourOfPeriod;
+final minute = selectedTime.value.minute.toString().padLeft(2, '0');
+final period = selectedTime.value.period == DayPeriod.am ? 'AM' : 'PM';
+final formattedTime = "$hour:$minute $period";
       Reminder reminder = Reminder(
         date: selectedDate.value,
         time: formattedTime,
