@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Comman/nav_bar.dart';
+import '../../Modules/Auth/view/signIn_screen.dart';
 import 'doc_data.dart';
-
-
 
 class AuthService {
   var docdata = DocData();
   CreateUser(data, context) async {
     try {
       final credential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: data['email']!,
         password: data['password']!,
       );
@@ -47,5 +46,10 @@ class AuthService {
     } catch (e) {
       print("Unexpected login error: $e");
     }
+  }
+
+  SignOut() async {
+    await FirebaseAuth.instance.signOut();
+    Get.to(() => SigninScreen());
   }
 }

@@ -41,39 +41,47 @@ class _UserProfileState extends State<UserProfile> {
                     height: 10,
                   ),
                   Container(
-                    color: Colors.transparent,
+                      color: Colors.transparent,
                       child: Column(children: [
-                    HeadingWidget(label: "Owner"),
-                    CustomField(
-                        controller: userController.namecontroller,
-                        label: 'Name'),
-                    CustomField(
-                        controller: userController.gendercontroller,
-                        label: 'Gender'),
-                    HeadingWidget(label: "Owner's contacts"),
-                    CustomField(
-                        controller: userController.Emailcontroller,
-                        label: 'Email'),
-                    CustomField(
-                        controller: userController.Phonecontroller,
-                        label: 'Phone'),
-                    HeadingWidget(label: "City of residence"),
-                    CustomField(
-                        controller: userController.Countrycontroller,
-                        label: 'Country'),
-                    CustomField(
-                        controller: userController.Citycontroller,
-                        label: 'City'),
-                    HeadingWidget(label: "Address"),
-                    CustomField(
-                        controller: userController.AddressController,
-                        label: 'Address'),
-                    const Padding(
-                      padding: EdgeInsets.only(
-                          left: 10.0, right: 15, bottom: 18, top: 10),
-                      child: custom_button(),
-                    )
-                  ]))
+                        HeadingWidget(label: "Owner"),
+                        CustomField(
+                          controller: userController.namecontroller,
+                          label: 'Name',
+                          keyboardType: TextInputType.text,
+                        ),
+                        CustomField(
+                            controller: userController.gendercontroller,
+                            keyboardType: TextInputType.text,
+                            label: 'Gender'),
+                        HeadingWidget(label: "Owner's contacts"),
+                        CustomField(
+                            controller: userController.Emailcontroller,
+                            keyboardType: TextInputType.emailAddress,
+                            label: 'Email'),
+                        CustomField(
+                            controller: userController.Phonecontroller,
+                            keyboardType: TextInputType.phone,
+                            label: 'Phone'),
+                        HeadingWidget(label: "City of residence"),
+                        CustomField(
+                            keyboardType: TextInputType.text,
+                            controller: userController.Countrycontroller,
+                            label: 'Country'),
+                        CustomField(
+                            keyboardType: TextInputType.text,
+                            controller: userController.Citycontroller,
+                            label: 'City'),
+                        HeadingWidget(label: "Address"),
+                        CustomField(
+                            keyboardType: TextInputType.multiline,
+                            controller: userController.AddressController,
+                            label: 'Address'),
+                        const Padding(
+                          padding: EdgeInsets.only(
+                              left: 10.0, right: 15, bottom: 18, top: 10),
+                          child: custom_button(),
+                        )
+                      ]))
                 ],
               ),
             ),

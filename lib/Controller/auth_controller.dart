@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet_app/Modules/Auth/view/signIn_screen.dart';
 
 import '../Services/Auth/auth_service.dart';
 import 'User_controller.dart';
@@ -82,6 +83,11 @@ class AuthController extends GetxController {
       await authService.login(data, context);
       isLoading.value = false;
     }
+  }
+
+
+  Future<void> Signout() async{
+    await authService.SignOut();
   }
 
   @override
