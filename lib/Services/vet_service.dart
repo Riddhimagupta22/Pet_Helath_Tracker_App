@@ -14,7 +14,7 @@ class VetVisitService {
 
     await _firestore
         .collection('users')
-        .doc(user.uid)
+        .doc(user?.uid)
         .collection('vet_visits')
         .doc(timestamp)
         .set(visit.toJson());
@@ -26,7 +26,7 @@ class VetVisitService {
 
     await _firestore
         .collection('users')
-        .doc(user.uid)
+        .doc(user?.uid)
         .collection('vet_visits')
         .doc(id)
         .delete();
@@ -39,7 +39,7 @@ class VetVisitService {
 
     final snapshot = await _firestore
         .collection('users')
-        .doc(user.uid)
+        .doc(user?.uid)
         .collection('vet_visits')
         .orderBy('date', descending: true)
         .get();

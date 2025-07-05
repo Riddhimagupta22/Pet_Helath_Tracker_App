@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_app/Modules/Health/heathcare.dart';
 import 'package:pet_app/Modules/Reminder/view/reminder.dart';
 import 'package:pet_app/Modules/Dashboard/Widget/card_widget.dart';
-import 'package:pet_app/Modules/User%20profile/view/user_profile.dart';
 
-import '../../Health/Health.dart';
+import '../../User profile/view/user_profile.dart';
+import '../Pet mart/view/pet_mart.dart';
+import '../Widget/custom_container.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -64,52 +65,7 @@ class _HomepageState extends State<Homepage> {
           SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                    height: 120,
-                    color: Colors.white,
-                    child: Row(
-                      children: [
-                        Image.asset("Assets/Image/community .png",
-                            height: 215, width: 180),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "We have our own community...",
-                                softWrap: true,
-                                style: GoogleFonts.poppins(
-                                  color: Color.fromRGBO(243, 120, 29, 1),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Color.fromRGBO(243, 120, 29, 1),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: Text(
-                                  "Explore More",
-                                  style: GoogleFonts.inter(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )),
+                NewWidget(),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   // reminder
@@ -136,7 +92,9 @@ class _HomepageState extends State<Homepage> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: CardWidget(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(PetMart());
+                      },
                       image: "Assets/Icon/caticon.png",
                       title: "Pet Mart",
                       subtitle:
@@ -151,3 +109,5 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
+
+

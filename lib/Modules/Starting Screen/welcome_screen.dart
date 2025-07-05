@@ -1,8 +1,11 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_app/Comman/nav_bar.dart';
+import 'package:pet_app/Modules/Dashboard/View/homepage.dart';
 
 import 'Onboarding Screen/view/onboarding_screen.dart';
 
@@ -18,7 +21,7 @@ class _WelcomeState extends State<Welcome> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Get.off(OnBoarding());
+      Get.off(FirebaseAuth.instance.currentUser != null ? NavBar(): OnBoarding());
     });
   }
 

@@ -30,7 +30,7 @@ class VetVisitController extends GetxController {
     );
 
     final formattedDateTime =
-        DateFormat('yyyy-MM-dd hh:mm a').format(fullDateTime);
+        DateFormat('yyyy-MM-dd hh:mm ').format(fullDateTime);
     dateController.text = formattedDateTime;
 
     final visit = VetVisitModel(

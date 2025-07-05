@@ -14,22 +14,24 @@ class _CustomFieldState extends State<CustomField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48,
-      margin: EdgeInsets.only(bottom: 16),
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      height: 43,
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(253
+        borderRadius: BorderRadius.circular(12),
+        color: const Color.fromRGBO(253
             , 240, 220, 1),
 
       ),
       child: TextField(
         controller: widget.controller,
         decoration: InputDecoration(
-          labelText: widget.label,
-          labelStyle: GoogleFonts.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-             color:  Color.fromRGBO(79, 45, 39, 1)
+            border: InputBorder.none,
+          hintText: widget.label,
+          hintStyle: GoogleFonts.poppins(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+             color:   Color.fromRGBO(79, 45, 39, 1)
           )
         ),
 

@@ -104,7 +104,7 @@ class Heathcare extends StatelessWidget {
                   child: ElevatedButton.icon(
                     onPressed: () async {
                       await Get.to(() => VetVisit());
-                      controller.fetchVetVisits(); // Reload after adding
+                      controller.fetchVetVisits();
                     },
                     icon: const CircleAvatar(
                       radius: 13,
