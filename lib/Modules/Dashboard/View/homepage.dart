@@ -62,52 +62,48 @@ class _HomepageState extends State<Homepage> {
               fit: BoxFit.cover,
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                NewWidget(),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  // reminder
-                  child: CardWidget(
-                      onTap: () {
-                        Get.to(ReminderScreen());
-                      },
-                      image: "Assets/Icon/Callender Icon.png",
-                      title: "Upcoming Reminders",
-                      subtitle: "Today's feeding,\nwalking, and vet visits."),
-                ),
-                // vet visit
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: CardWidget(
-                      onTap: () {
-                        Get.to(Heathcare());
-                      },
-                      image: "Assets/Icon/Group.png",
-                      title: "Pet Health Summary",
-                      subtitle: "Overview of pet\nwellness.."),
-                ),
-                // mart
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: CardWidget(
-                      onTap: () {
-                        Get.to(PetMart());
-                      },
-                      image: "Assets/Icon/caticon.png",
-                      title: "Pet Mart",
-                      subtitle:
-                          "Daily advice on pet health,\ntraining, and nutrition."),
-                ),
-                SizedBox(height: 15),
-              ],
-            ),
+          Column(
+            children: [
+              NewWidget(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                // reminder
+                child: CardWidget(
+                    onTap: () {
+                      Get.to(ReminderScreen());
+                    },
+                    image: "Assets/Icon/Callender Icon.png",
+                    title: "Upcoming Reminders",
+                    subtitle: "Today's feeding,\nwalking, and vet visits."),
+              ),
+              // vet visit
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CardWidget(
+                    onTap: () {
+                      Get.to(Heathcare());
+                    },
+                    image: "Assets/Icon/Group.png",
+                    title: "Pet Health Summary",
+                    subtitle: "Overview of pet\nwellness.."),
+              ),
+              // mart
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: CardWidget(
+                    onTap: () {
+                      Get.to(PetMart());
+                    },
+                    image: "Assets/Icon/caticon.png",
+                    title: "Pet Mart",
+                    subtitle:
+                        "Daily advice on pet health,\ntraining, and nutrition."),
+              ),
+              SizedBox(height: 1),
+            ],
           ),
         ],
       ),
     );
   }
 }
-
-
