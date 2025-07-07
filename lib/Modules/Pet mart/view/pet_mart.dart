@@ -1,8 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../Widget/card.dart';
 
 class PetMart extends StatelessWidget {
-  const PetMart({super.key});
+  final List<Map<String, dynamic>> categories = [
+    {
+      "title": "Basic Commands",
+      "image": "Assets/Image/Card/Card1.png",
+    },
+    {
+      "title": "Choosing Pet Food",
+      "image":
+          "Assets/Image/Card/Card2.png",
+    },
+    {
+      "title": "Pet-Proofing",
+      "image":
+          "Assets/Image/Card/Card3.png",
+    },
+    {
+      "title": "Exercise Needs",
+      "image":
+          "Assets/Image/Card/Card4.png",
+    },
+    {
+      "title": "Stress Signs",
+      "image":
+          "Assets/Image/Card/Card5.png",
+    },
+    {
+      "title": "Vet Visits",
+      "image": "Assets/Image/Card/Card6.png",
+    },
+    {
+      "title": "Common Allergies",
+      "image": "Assets/Image/Card/Card7.png",
+    },
+    {
+      "title": "Best Treats",
+      "image":
+          "Assets/Image/Card/Card8.png",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +55,7 @@ class PetMart extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
               children: [
                 const SizedBox(height: 40),
@@ -67,7 +106,24 @@ class PetMart extends StatelessWidget {
                           border: UnderlineInputBorder(
                             borderSide: BorderSide.none,
                           )),
-                    ))
+                    )),
+                const SizedBox(height: 5),
+                Expanded(
+                    child: GridView.builder(
+                  itemCount: categories.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 3.75 / 3.5,
+                      crossAxisSpacing: 50,
+                      mainAxisSpacing: 50),
+                  itemBuilder: (BuildContext context, int index) {
+                    final category = categories[index];
+                    return card(
+                        title: category['title'],
+                        imagepath: category['image'],
+                        onTap: () {});
+                  },
+                ))
               ],
             ),
           )
