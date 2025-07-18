@@ -79,22 +79,25 @@ class PetController extends GetxController {
 
   Future<File?> cropImage(XFile image) async {
     try {
-      final croppedFile = await ImageCropper().cropImage(
+      final CroppedFile? croppedFile = await ImageCropper().cropImage(
         sourcePath: image.path,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio7x5,
-          CropAspectRatioPreset.ratio16x9,
-          CropAspectRatioPreset.original,
-        ],
         uiSettings: [
           AndroidUiSettings(
             toolbarTitle: 'Crop Image',
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false,
+            aspectRatioPresets: [
+              CropAspectRatioPreset.square,
+              CropAspectRatioPreset.ratio4x3,
+              CropAspectRatioPreset.ratio7x5,
+              CropAspectRatioPreset.ratio16x9,
+              CropAspectRatioPreset.original,
+            ],
           ),
-          IOSUiSettings(title: 'Crop Image'),
+          IOSUiSettings(
+            title: 'Crop Image',
+            aspectRatioLockEnabled: false,
+          ),
         ],
       );
 
@@ -104,6 +107,8 @@ class PetController extends GetxController {
       return null;
     }
   }
+
+
 
   Future<XFile> compressImage(File file) async {
     final dir = Directory.systemTemp;
