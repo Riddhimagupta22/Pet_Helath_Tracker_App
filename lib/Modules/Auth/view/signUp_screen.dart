@@ -129,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Password",
+                          "Passwordnn",
                           style: GoogleFonts.poppins(
                               fontSize: 16, fontWeight: FontWeight.w400),
                         ),
